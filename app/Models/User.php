@@ -45,6 +45,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * User exposed observable events.
+     *
+     * These are extra user-defined events observers may subscribe to.
+     *
+     * @var array
+     */
     protected  $dispatchesEvents = [
        'created'=> UserCreated::class,
        'updated'=> UserUpdated::class,
