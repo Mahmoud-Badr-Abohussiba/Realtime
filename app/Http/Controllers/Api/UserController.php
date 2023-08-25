@@ -69,6 +69,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return $user;
+        return 'deleted successfuly';
     }
 }
