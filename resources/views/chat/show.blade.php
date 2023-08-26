@@ -2,7 +2,9 @@
 
 @push('styles')
     <style type="text/css">
-
+        #users > li {
+            cursor: pointer;
+        }
     </style>
 @endpush
 
@@ -67,6 +69,7 @@
                     let element = document.createElement('li');
 
                     element.setAttribute('id',user.id);
+                    element.setAttribute('onclick','greetUser("'+user.id+'")');
                     element.innerText = user.name;
 
                     usersElement.appendChild(element);
@@ -76,6 +79,7 @@
                 let element = document.createElement('li');
 
                 element.setAttribute('id',user.id);
+                element.setAttribute('onclick','greetUser("'+user.id+'")');
                 element.innerText = user.name;
 
                 usersElement.appendChild(element);
@@ -106,5 +110,23 @@
 
             messageElement.value = '';
         });
+    </script>
+    <script type="module">
+        window.greetUser = function (id){
+            window.axios.post('/chat/greet/'+id);
+        }
+    </script>
+    <script type="module">
+        const messagesElement = document.getElementById('messages')
+
+        Echo.private("chat.greet.{{auth()->user()->id}}")
+            .listen('GreetingSent',(e)=>{
+                let element = document.createElement('li');
+
+                element.innerText = e.message;
+                element.classList.add('text-success');
+
+                messagesElement.appendChild(element);
+            });
     </script>
 @endpush
