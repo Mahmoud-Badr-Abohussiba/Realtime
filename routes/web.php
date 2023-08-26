@@ -24,3 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/users','users.showAll')->name('users.all');
 
 Route::view('/game','game.show')->name('game.show');
+
+Route::get('/chat', [App\Http\Controllers\ChatController::class, 'showChat'])->name('chat.show');
+
+Route::post('/chat/message', [App\Http\Controllers\ChatController::class, 'messageReceived'])->name('chat.message');
