@@ -28,7 +28,10 @@ window.Echo = new Echo({
     wsHost: import.meta.env.VITE_PUSHER_HOST ?? `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
-    forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
+    forceTLS: false, //we are on local, so HTTP HTTPS won't matter
+    disableStats: true, //this is for pusher as are to not to use it now
+    // forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
+    useTLS: false,
     enabledTransports: ['ws', 'wss'],
     cluster:import.meta.env.VITE_PUSHER_APP_CLUSTER,//added this line
 });
